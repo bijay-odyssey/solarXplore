@@ -22,11 +22,15 @@
             min-height: 100vh;
             overflow-x: hidden;
             font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .solar-system {
-            perspective: 1000px;
-            transform-style: preserve-3d;
+            position: relative;
+            width: 800px;
+            height: 800px;
         }
 
         .sun {
@@ -66,14 +70,13 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.9);
             padding: 2rem;
             border-radius: 15px;
             border: 2px solid #00f7ff;
             max-width: 400px;
             display: none;
-            transition: transform 0.5s ease;
         }
 
         @keyframes float {
@@ -82,30 +85,22 @@
         }
 
         .orbit {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
         }
 
-        .stars div {
-            position: absolute;
-            background: var(--star-color);
-            border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <div class="stars"></div>
-    <img src="https://cdn-icons-png.flaticon.com/512/565/565394.png" class="astronaut" alt="Astronaut" title="Click me for help!">
+    <img src="https://cdn-icons-png.flaticon.com/512/565/565394.png" class="astronaut" alt="Astronaut">
     <div class="solar-system">
         <div class="sun"></div>
     </div>
@@ -122,16 +117,36 @@
             const container = document.querySelector('.stars');
             for (let i = 0; i < 200; i++) {
                 const star = document.createElement('div');
+                star.style.position = 'absolute';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.width = Math.random() * 3 + 'px';
                 star.style.height = star.style.width;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
                 container.appendChild(star);
             }
         }
 
-        function darkenColor(hex) {
-            return `#${hex.slice(1).split('').map(c => (parseInt(c, 16) * 0.7).toString(16)[0]).join('')}`;
+        const planets = [
+            { name: 'Mercury', color: '#A0522D', size: 15, orbit: 120, fact: 'The smallest planet in our solar system!' },
+            { name: 'Venus', color: '#DEB887', size: 25, orbit: 180, fact: 'Hottest planet with surface temperature over 450°C' },
+            { name: 'Earth', color: '#4169E1', size: 27, orbit: 250, fact: 'Our home planet with liquid water' },
+        ];
+
+        function createSolarSystem() {
+            const system = document.querySelector('.solar-system');
+            planets.forEach(planet => {
+                const planetDiv = document.createElement('div');
+                planetDiv.className = 'planet';
+                planetDiv.style.width = planet.size + 'px';
+                planetDiv.style.height = planet.size + 'px';
+                planetDiv.style.background = planet.color;
+                planetDiv.style.left = `calc(50% + ${planet.orbit}px)`;
+                planetDiv.style.top = '50%';
+                planetDiv.addEventListener('click', () => showPlanetInfo(planet));
+                system.appendChild(planetDiv);
+            });
         }
 
         function showPlanetInfo(planet) {
@@ -139,20 +154,15 @@
             document.querySelector('.planet-name').textContent = planet.name;
             document.querySelector('.planet-fact').textContent = planet.fact;
             info.style.display = 'block';
-            gsap.to(info, { scale: 1, duration: 0.5, ease: 'back.out' });
-            new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'] }).play();
         }
 
         function closeInfo() {
-            gsap.to('.planet-info', { scale: 0, duration: 0.3, onComplete: () => document.querySelector('.planet-info').style.display = 'none' });
+            document.querySelector('.planet-info').style.display = 'none';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
-            document.querySelector('.astronaut').addEventListener('click', () => {
-                new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2570/2570-preview.mp3'] }).play();
-                alert("Welcome Space Explorer! Click on planets to learn fun facts!");
-            });
+            createSolarSystem();
         });
     </script>
 </body>
