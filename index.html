@@ -3,747 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bijaya Kumar Pariyar - Data Scientist & AI Engineer specializing in RAG systems, LLMs, and production ML pipelines">
-    <meta name="author" content="Bijaya Kumar Pariyar">
-    <title>Bijaya Kumar Pariyar | Data Scientist & AI Engineer</title>
+    <title>Solar Voyager | Explore Our Solar System</title>
     
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
-    
-    <!-- Bootstrap CSS -->
+    <!-- Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --space-bg: #000;
+            --star-color: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            background: var(--space-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .solar-system {
+            position: relative;
+            width: 800px;
+            height: 800px;
+        }
+
+        .sun {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(#ffd700, #ff8c00);
+            border-radius: 50%;
+            box-shadow: 0 0 50px #ff8c00;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet {
+
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .planet:hover {
+            transform: scale(1.2) !important;
+        }
+
+        .astronaut {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+
+            z-index: 1000;
+        }
+
+        .planet-info {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #00f7ff;
+            max-width: 400px;
+            display: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
-                <i class="fas fa-code me-2"></i>BKP
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#experience">Experience</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-8 mx-auto text-center">
-                    <p class="text-primary mb-3" data-aos="fade-down">Data Scientist & AI Engineer</p>
-                    <h1 class="display-3 fw-bold mb-4" data-aos="fade-up" data-aos-delay="100">
-                        Bijaya Kumar Pariyar
-                    </h1>
-                    <p class="lead text-muted mb-4" data-aos="fade-up" data-aos-delay="200">
-                        Building intelligent systems through machine learning, NLP, and production-grade RAG architectures. 
-                        Transforming complex data into actionable insights.
-                    </p>
-                    <div class="d-flex gap-3 justify-content-center mb-5" data-aos="fade-up" data-aos-delay="300">
-                        <a href="#projects" class="btn btn-primary btn-lg">
-                            <i class="fas fa-folder-open me-2"></i>View Projects
-                        </a>
-                        <a href="#contact" class="btn btn-outline-light btn-lg">
-                            <i class="fas fa-envelope me-2"></i>Contact Me
-                        </a>
-                    </div>
-                    
-                    <!-- Stats -->
-                    <div class="row g-4 mt-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="col-md-4">
-                            <div class="stat-box">
-                                <h3 class="fw-bold mb-0">20+</h3>
-                                <p class="text-muted mb-0">ML Projects</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-box">
-                                <h3 class="fw-bold mb-0">1M+</h3>
-                                <p class="text-muted mb-0">Rows Processed</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="stat-box">
-                                <h3 class="fw-bold mb-0">65+</h3>
-                                <p class="text-muted mb-0">GitHub Repos</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="section-title text-center mb-5" data-aos="fade-up">
-                        <h2 class="fw-bold">About Me</h2>
-                        <div class="title-underline mx-auto"></div>
-                    </div>
-                    
-                    <div class="row g-4">
-                        <div class="col-lg-8" data-aos="fade-right">
-                            <p class="lead mb-4">
-                                Self-taught Data Scientist with hands-on experience building end-to-end ML solutions across 
-                                classification, regression, clustering, anomaly detection, and time series forecasting.
-                            </p>
-                            <p class="text-muted mb-4">
-                                Currently working as a Data Scientist Intern at <strong>CR Equity AI, Inc.</strong>, where I design and 
-                                implement production-grade RAG pipelines, integrate LLM APIs, and build FastAPI services for document 
-                                intelligence. My work spans from classical ML to cutting-edge AI systems, with a strong focus on 
-                                security, scalability, and real-world deployment.
-                            </p>
-                            <p class="text-muted mb-4">
-                                I've completed over 20 structured ML projects, handling large-scale datasets with 1M+ rows for fraud 
-                                detection and 1.7M+ rows for forecasting. My approach combines rigorous evaluation, model explainability 
-                                through SHAP, and reproducible research workflows.
-                            </p>
-                            
-                            <div class="row g-3 mt-4">
-                                <div class="col-sm-6">
-                                    <div class="info-item">
-                                        <i class="fas fa-graduation-cap text-primary me-2"></i>
-                                        <span><strong>Education:</strong> BCA, Tribhuvan University</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="info-item">
-                                        <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                                        <span><strong>Location:</strong> Kathmandu, Nepal</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="info-item">
-                                        <i class="fas fa-briefcase text-primary me-2"></i>
-                                        <span><strong>Role:</strong> Data Scientist Intern</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="info-item">
-                                        <i class="fas fa-building text-primary me-2"></i>
-                                        <span><strong>Company:</strong> CR Equity AI, Inc.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4" data-aos="fade-left">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">Quick Links</h5>
-                                    <div class="d-grid gap-2">
-                                        <a href="https://github.com/bijay-odyssey" target="_blank" class="btn btn-outline-dark">
-                                            <i class="fab fa-github me-2"></i>GitHub
-                                        </a>
-                                        <a href="https://www.linkedin.com/in/bijaya-kumar-pariyar-45329437a/" target="_blank" class="btn btn-outline-primary">
-                                            <i class="fab fa-linkedin me-2"></i>LinkedIn
-                                        </a>
-                                        <a href="https://www.kaggle.com/bijaybeezoe" target="_blank" class="btn btn-outline-info">
-                                            <i class="fab fa-kaggle me-2"></i>Kaggle
-                                        </a>
-                                        <a href="mailto:bijaybeezoe@gmail.com" class="btn btn-outline-danger">
-                                            <i class="fas fa-envelope me-2"></i>Email
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="py-5 bg-light">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Experience</h2>
-                <div class="title-underline mx-auto"></div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="card border-0 shadow-sm" data-aos="fade-up">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-start mb-3">
-                                <div>
-                                    <h4 class="fw-bold mb-1">Data Scientist Intern</h4>
-                                    <p class="text-primary mb-1">CR Equity AI, Inc.</p>
-                                    <p class="text-muted small">
-                                        <i class="fas fa-map-marker-alt me-1"></i>Remote (Tallahassee, Florida, United States)
-                                    </p>
-                                </div>
-                                <span class="badge bg-primary">Dec 2025 - Present</span>
-                            </div>
-                            
-                            <p class="mb-3">
-                                Contributing to LLM-based RAG systems and backend AI services for document intelligence. 
-                                Collaborating remotely with a US-based engineering team using Agile development practices.
-                            </p>
-                            
-                            <h6 class="fw-bold mb-3">Key Responsibilities & Achievements:</h6>
-                            <ul class="mb-3">
-                                <li>Designed and implemented end-to-end RAG pipelines including document chunking, embedding generation, vector retrieval, reranking, and prompt construction</li>
-                                <li>Integrated and managed LLM APIs with retry logic, timeout handling, prompt/token constraints, and response validation</li>
-                                <li>Built production-grade FastAPI services for document processing, querying, and AI inference</li>
-                                <li>Worked with vector databases (FAISS, Qdrant, PostgreSQL pgvector) for scalable semantic search</li>
-                                <li>Implemented asynchronous processing pipelines using Redis-backed job tracking and webhook-based callbacks</li>
-                                <li>Applied security best practices including JWT authentication, SSRF protection, rate limiting, CORS, and trusted host validation</li>
-                                <li>Containerized backend services using Docker and implemented structured logging, metrics collection, and observability</li>
-                                <li>Conducting research on SOC practices and security hardening for production AI and backend systems</li>
-                            </ul>
-                            
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-secondary">Python</span>
-                                <span class="badge bg-secondary">FastAPI</span>
-                                <span class="badge bg-secondary">RAG</span>
-                                <span class="badge bg-secondary">LLMs</span>
-                                <span class="badge bg-secondary">FAISS</span>
-                                <span class="badge bg-secondary">Qdrant</span>
-                                <span class="badge bg-secondary">Docker</span>
-                                <span class="badge bg-secondary">Redis</span>
-                                <span class="badge bg-secondary">PostgreSQL</span>
-                                <span class="badge bg-secondary">JWT</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-5">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Featured Projects</h2>
-                <div class="title-underline mx-auto"></div>
-                <p class="text-muted mt-3">A selection of my recent work in ML, AI, and data science</p>
-            </div>
-            
-            <div class="row g-4">
-                <!-- Project 1 - Featured -->
-                <div class="col-lg-12" data-aos="fade-up">
-                    <div class="card project-card border-0 shadow-sm h-100 featured-project">
-                        <div class="ribbon">Featured</div>
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-robot"></i>
-                                </div>
-                                <div>
-                                    <h4 class="fw-bold mb-1">Personal Knowledge Base RAG API</h4>
-                                    <p class="text-muted small mb-0">FastAPI • FAISS • Qdrant • Groq • LLMs</p>
-                                </div>
-                            </div>
-                            <p class="mb-3">
-                                Modular RAG API built from scratch with FastAPI for document upload and natural language querying. 
-                                Features switchable vector backends (FAISS/Qdrant), multiple chunking strategies, cross-encoder 
-                                reranking, and Groq-powered generation with Llama-3.3-70B.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>FastAPI endpoints for TXT/PDF ingestion and semantic querying</li>
-                                <li>Configurable chunking strategies (fixed-size, sentence, recursive)</li>
-                                <li>Thread-safe writes with metadata filtering</li>
-                                <li>Low-latency responses with sentence-transformers embeddings</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/Personal-Knowledge-Base-RAG-API" target="_blank" class="btn btn-sm btn-primary">
-                                <i class="fab fa-github me-1"></i>View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 2 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-search"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">RAG Precision Enhancement</h5>
-                            </div>
-                            <p class="text-muted small mb-3">FAISS • Cross-Encoder • Reranking</p>
-                            <p class="mb-3">
-                                Comparative study demonstrating why retrieval alone isn't enough. Built two-stage retrieval + 
-                                reranking pipeline with noise injection to stress-test semantic search performance.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Noise injection with 20+ hard-negative documents</li>
-                                <li>Cross-encoder reranking (BAAI/bge-reranker-base)</li>
-                                <li>Evaluated via Hit Rate@k and MRR metrics</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/retrieval-vs-reranking" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 3 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">ChurnShield</h5>
-                            </div>
-                            <p class="text-muted small mb-3">Flask • Scikit-learn • SHAP • SQLite</p>
-                            <p class="mb-3">
-                                Flask web app for real-time churn prediction with authentication, admin dashboard, and CSV export. 
-                                Integrated Random Forest pipeline with SHAP explainability.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Real-time prediction with Random Forest</li>
-                                <li>SHAP-based feature importance</li>
-                                <li>Automated retention strategy generator</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/ChurnShield-App" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 4 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-credit-card"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">IEEE Fraud Detection</h5>
-                            </div>
-                            <p class="text-muted small mb-3">XGBoost • SHAP • Imbalanced Learning</p>
-                            <p class="mb-3">
-                                Transaction classification on 1M+ Kaggle IEEE-CIS records using XGBoost. Achieved ROC-AUC 0.95 
-                                and F1 0.66 on imbalanced fraud class.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Processed 1M+ transaction records</li>
-                                <li>Feature reduction via Spearman correlation</li>
-                                <li>Hyperparameter tuning with Optuna</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/Classification" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 5 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">Time Series Forecasting</h5>
-                            </div>
-                            <p class="text-muted small mb-3">LightGBM • Prophet • Feature Engineering</p>
-                            <p class="mb-3">
-                                SKU-level supermarket price forecasting on 1.7M+ rows using LightGBM and Prophet with lag, 
-                                rolling, and calendar features.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Processed 1.7M+ retail records</li>
-                                <li>TimeSeriesSplit cross-validation</li>
-                                <li>Evaluated via RMSE, MAPE, SMAPE</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/Time-Series-Forecasting" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Project 6 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">Retail Price Optimization</h5>
-                            </div>
-                            <p class="text-muted small mb-3">Random Forest • Optuna • SHAP</p>
-                            <p class="mb-3">
-                                Competition-aware ML workflow integrating historical sales and competitor pricing. Achieved R² ≈ 0.92 
-                                with Random Forest and SHAP explainability.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Full ML pipeline with EDA</li>
-                                <li>Hyperparameter tuning with Optuna</li>
-                                <li>Profit and revenue optimization</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/price-optimization-refined" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 7 -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card project-card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="project-icon me-3">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <h5 class="fw-bold mb-0">Anomaly Detection</h5>
-                            </div>
-                            <p class="text-muted small mb-3">Isolation Forest • LOF • KMeans • DBSCAN</p>
-                            <p class="mb-3">
-                                Multi-method anomaly detection pipeline combining model-based, cluster-based, and statistical approaches 
-                                on fraud and retail datasets.
-                            </p>
-                            <ul class="small mb-3">
-                                <li>Multiple detection algorithms compared</li>
-                                <li>Evaluation via ROC-AUC and precision/recall</li>
-                                <li>PCA visualization of anomalies</li>
-                            </ul>
-                            <a href="https://github.com/bijay-odyssey/anomaly-detection" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="fab fa-github me-1"></i>GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- More Projects -->
-            <div class="text-center mt-5" data-aos="fade-up">
-                <h5 class="fw-bold mb-4">More Projects</h5>
-                <div class="d-flex flex-wrap gap-2 justify-content-center">
-                    <a href="https://github.com/bijay-odyssey/Regression" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Regression Portfolio
-                    </a>
-                    <a href="https://github.com/bijay-odyssey/Unsupervised-Learning" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Customer Segmentation
-                    </a>
-                    <a href="https://github.com/bijay-odyssey/embeddings-scripts" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Text Embeddings Explorer
-                    </a>
-                    <a href="https://github.com/bijay-odyssey/Semantic-Search-With-FAISS" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Semantic Search (FAISS)
-                    </a>
-                    <a href="https://github.com/bijay-odyssey/vectorDB" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Qdrant Vector DB
-                    </a>
-                    <a href="https://github.com/bijay-odyssey/chunking" target="_blank" class="btn btn-sm btn-outline-secondary">
-                        Text Chunking Strategies
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="py-5 bg-light">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Technical Skills</h2>
-                <div class="title-underline mx-auto"></div>
-            </div>
-            
-            <div class="row g-4">
-                <!-- Programming -->
-                <div class="col-lg-6" data-aos="fade-up">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-code text-primary me-2"></i>Programming
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Python</span>
-                                <span class="badge bg-light text-dark">SQL</span>
-                                <span class="badge bg-light text-dark">Java</span>
-                                <span class="badge bg-light text-dark">JavaScript</span>
-                                <span class="badge bg-light text-dark">PHP</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Machine Learning -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-brain text-primary me-2"></i>Machine Learning
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Classification</span>
-                                <span class="badge bg-light text-dark">Regression</span>
-                                <span class="badge bg-light text-dark">Clustering</span>
-                                <span class="badge bg-light text-dark">Anomaly Detection</span>
-                                <span class="badge bg-light text-dark">Time Series</span>
-                                <span class="badge bg-light text-dark">Feature Engineering</span>
-                                <span class="badge bg-light text-dark">Hyperparameter Tuning</span>
-                                <span class="badge bg-light text-dark">SHAP</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- AI & NLP -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-robot text-primary me-2"></i>AI & NLP
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">LLMs</span>
-                                <span class="badge bg-light text-dark">RAG Systems</span>
-                                <span class="badge bg-light text-dark">Vector Databases</span>
-                                <span class="badge bg-light text-dark">Embeddings</span>
-                                <span class="badge bg-light text-dark">Semantic Search</span>
-                                <span class="badge bg-light text-dark">Reranking</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Frameworks & Libraries -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-book text-primary me-2"></i>Frameworks & Libraries
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">Scikit-learn</span>
-                                <span class="badge bg-light text-dark">Pandas</span>
-                                <span class="badge bg-light text-dark">NumPy</span>
-                                <span class="badge bg-light text-dark">LightGBM</span>
-                                <span class="badge bg-light text-dark">XGBoost</span>
-                                <span class="badge bg-light text-dark">Prophet</span>
-                                <span class="badge bg-light text-dark">sentence-transformers</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Databases -->
-                <div class="col-lg-6" data-aos="fade-up">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-database text-primary me-2"></i>Databases & Vector Stores
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">FAISS</span>
-                                <span class="badge bg-light text-dark">Qdrant</span>
-                                <span class="badge bg-light text-dark">PostgreSQL (pgvector)</span>
-                                <span class="badge bg-light text-dark">Redis</span>
-                                <span class="badge bg-light text-dark">SQLite</span>
-                                <span class="badge bg-light text-dark">MySQL</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Deployment & DevOps -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-rocket text-primary me-2"></i>Deployment & DevOps
-                            </h5>
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-light text-dark">FastAPI</span>
-                                <span class="badge bg-light text-dark">Flask</span>
-                                <span class="badge bg-light text-dark">Docker</span>
-                                <span class="badge bg-light text-dark">Git/GitHub</span>
-                                <span class="badge bg-light text-dark">JWT Auth</span>
-                                <span class="badge bg-light text-dark">Rate Limiting</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Research</h2>
-                <div class="title-underline mx-auto"></div>
-            </div>
-            
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <div class="card border-0 shadow-sm" data-aos="fade-up">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-start">
-                                <div class="me-3">
-                                    <i class="fas fa-file-alt fa-3x text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold mb-2">
-                                        SHAP-Based Feature Selection and Iterative Hyperparameter Tuning for Customer Churn 
-                                        Prediction in Telecommunication Datasets
-                                    </h5>
-                                    <p class="text-muted small mb-3">Preprint • 2024</p>
-                                    <p class="mb-3">
-                                        Explores interpretability and optimization techniques for churn modeling, demonstrating 
-                                        SHAP values for transparent feature importance and iterative tuning for enhanced model 
-                                        performance on real-world telecom data.
-                                    </p>
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <span class="badge bg-light text-dark">SHAP</span>
-                                        <span class="badge bg-light text-dark">Hyperparameter Tuning</span>
-                                        <span class="badge bg-light text-dark">Churn Prediction</span>
-                                        <span class="badge bg-light text-dark">Telecom</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-5 bg-light">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="fw-bold">Get In Touch</h2>
-                <div class="title-underline mx-auto"></div>
-                <p class="text-muted mt-3">
-                    I'm always interested in discussing new opportunities, collaborations, or innovative projects
-                </p>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up">
-                    <div class="card border-0 shadow-sm text-center h-100">
-                        <div class="card-body p-4">
-                            <div class="contact-icon mb-3">
-                                <i class="fas fa-envelope fa-2x text-primary"></i>
-                            </div>
-                            <h6 class="fw-bold mb-2">Email</h6>
-                            <p class="text-muted small mb-0">bijaybeezoe@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm text-center h-100">
-                        <div class="card-body p-4">
-                            <div class="contact-icon mb-3">
-                                <i class="fas fa-phone fa-2x text-primary"></i>
-                            </div>
-                            <h6 class="fw-bold mb-2">Phone</h6>
-                            <p class="text-muted small mb-0">+977-9767645335</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow-sm text-center h-100">
-                        <div class="card-body p-4">
-                            <div class="contact-icon mb-3">
-                                <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
-                            </div>
-                            <h6 class="fw-bold mb-2">Location</h6>
-                            <p class="text-muted small mb-0">Kathmandu, Nepal</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-5">
-                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
-                    <div class="social-links">
-                        <a href="https://github.com/bijay-odyssey" target="_blank" class="btn btn-lg btn-outline-dark rounded-circle mx-2">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/bijaya-kumar-pariyar-45329437a/" target="_blank" class="btn btn-lg btn-outline-primary rounded-circle mx-2">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://www.kaggle.com/bijaybeezoe" target="_blank" class="btn btn-lg btn-outline-info rounded-circle mx-2">
-                            <i class="fab fa-kaggle"></i>
-                        </a>
-                        <a href="mailto:bijaybeezoe@gmail.com" class="btn btn-lg btn-outline-danger rounded-circle mx-2">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-4 bg-dark text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="mb-0">&copy; 2026 Bijaya Kumar Pariyar. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0 text-muted small">Built with passion for data science and AI</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS Bundle -->
+    <div class="stars"></div>
+    <img src="https://cdn-icons-png.flaticon.com/512/565/565394.png" class="astronaut" alt="Astronaut">
+    <div class="solar-system">
+        <div class="sun"></div>
+    </div>
+    <div class="planet-info">
+        <h2 class="planet-name"></h2>
+        <p class="planet-fact"></p>
+        <button class="btn btn-primary mt-3" onclick="closeInfo()">Close</button>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS Animation Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script>
+        function createStars() {
+            const container = document.querySelector('.stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.style.position = 'absolute';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
+                container.appendChild(star);
+            }
+        }
+
+        const planets = [
+            { name: 'Mercury', color: '#A0522D', size: 15, orbit: 120, fact: 'The smallest planet in our solar system!' },
+            { name: 'Venus', color: '#DEB887', size: 25, orbit: 180, fact: 'Hottest planet with surface temperature over 450°C' },
+            { name: 'Earth', color: '#4169E1', size: 27, orbit: 250, fact: 'Our home planet with liquid water' },
+        ];
+
+        function createSolarSystem() {
+            const system = document.querySelector('.solar-system');
+            planets.forEach(planet => {
+                const planetDiv = document.createElement('div');
+                planetDiv.className = 'planet';
+                planetDiv.style.width = planet.size + 'px';
+                planetDiv.style.height = planet.size + 'px';
+                planetDiv.style.background = planet.color;
+                planetDiv.style.left = `calc(50% + ${planet.orbit}px)`;
+                planetDiv.style.top = '50%';
+                planetDiv.addEventListener('click', () => showPlanetInfo(planet));
+                system.appendChild(planetDiv);
+            });
+        }
+
+        function showPlanetInfo(planet) {
+            const info = document.querySelector('.planet-info');
+            document.querySelector('.planet-name').textContent = planet.name;
+            document.querySelector('.planet-fact').textContent = planet.fact;
+            info.style.display = 'block';
+        }
+
+        function closeInfo() {
+            document.querySelector('.planet-info').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createSolarSystem();
+        });
+    </script>
 </body>
 </html>
